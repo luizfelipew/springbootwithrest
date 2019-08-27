@@ -1,4 +1,4 @@
-package br.com.wendt.restwithspringboot.request.converters;
+package br.com.wendt.restwithspringboot.request;
 
 public class NumberConverter {
 
