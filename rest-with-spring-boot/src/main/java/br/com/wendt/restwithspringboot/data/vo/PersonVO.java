@@ -1,32 +1,20 @@
-package br.com.wendt.restwithspringboot.model;
+package br.com.wendt.restwithspringboot.data.vo;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "person")
-public class Person implements Serializable {
 
-    private static final long serialVersionUID = -8264636257227710457L;
+public class PersonVO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private static final long serialVersionUID = -1532146641385397203L;
+
     private Long id;
-
-    @Column(name = "first_name", nullable = false, length = 80)
     private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
-
-    @Column(name = "address", nullable = false, length = 100)
     private String address;
-
-    @Column(name = "gender", nullable = false, length = 6)
     private String gender;
 
-    public Person() {
+    public PersonVO() {
     }
 
     public Long getId() {
@@ -72,13 +60,13 @@ public class Person implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
-        return id.equals(person.id) &&
-                firstName.equals(person.firstName) &&
-                lastName.equals(person.lastName) &&
-                address.equals(person.address) &&
-                gender.equals(person.gender);
+        if (!(o instanceof PersonVO)) return false;
+        PersonVO personVO = (PersonVO) o;
+        return Objects.equals(id, personVO.id) &&
+                Objects.equals(firstName, personVO.firstName) &&
+                Objects.equals(lastName, personVO.lastName) &&
+                Objects.equals(address, personVO.address) &&
+                Objects.equals(gender, personVO.gender);
     }
 
     @Override

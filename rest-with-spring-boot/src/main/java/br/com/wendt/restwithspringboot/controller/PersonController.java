@@ -1,6 +1,6 @@
 package br.com.wendt.restwithspringboot.controller;
 
-import br.com.wendt.restwithspringboot.model.Person;
+import br.com.wendt.restwithspringboot.data.vo.PersonVO;
 import br.com.wendt.restwithspringboot.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,24 +16,24 @@ public class PersonController {
     private PersonService service;
 
     @GetMapping
-    public List<Person> findAll() {
+    public List<PersonVO> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public Person findById(@PathVariable(value = "id") Long id) {
+    public PersonVO findById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
 
     }
 
     @PostMapping
-    public Person create(@RequestBody Person person){
-        return service.create(person);
+    public PersonVO create(@RequestBody PersonVO personVO){
+        return service.create(personVO);
     }
 
     @PutMapping
-    public Person update(@RequestBody Person person){
-        return service.update(person);
+    public PersonVO update(@RequestBody PersonVO personVO){
+        return service.update(personVO);
     }
 
     @DeleteMapping("/{id}")
