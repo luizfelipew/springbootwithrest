@@ -1,6 +1,7 @@
 package br.com.wendt.restwithspringboot.controller;
 
 import br.com.wendt.restwithspringboot.data.vo.PersonVO;
+import br.com.wendt.restwithspringboot.data.vo.v2.PersonVOV2;
 import br.com.wendt.restwithspringboot.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,11 @@ public class PersonController {
     @PostMapping
     public PersonVO create(@RequestBody PersonVO personVO){
         return service.create(personVO);
+    }
+
+    @PostMapping("/v2")
+    public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2){
+        return service.createV2(personVOV2);
     }
 
     @PutMapping

@@ -1,7 +1,9 @@
 package br.com.wendt.restwithspringboot.services;
 
 import br.com.wendt.restwithspringboot.converter.DozerConverter;
+import br.com.wendt.restwithspringboot.converter.custom.PersonConverter;
 import br.com.wendt.restwithspringboot.data.vo.PersonVO;
+import br.com.wendt.restwithspringboot.data.vo.v2.PersonVOV2;
 import br.com.wendt.restwithspringboot.exception.ResourceNotFoundException;
 import br.com.wendt.restwithspringboot.data.model.Person;
 import br.com.wendt.restwithspringboot.repository.PersonRepository;
@@ -16,9 +18,18 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private PersonConverter converter;
+
     public PersonVO create(PersonVO person){
         var entity = DozerConverter.parseObject(person, Person.class);
         var vo = DozerConverter.parseObject(personRepository.save(entity), PersonVO.class);
+        return vo;
+    }
+
+    public PersonVOV2 createV2(PersonVOV2 person){
+        var entity = converter.converterVOToEntity(person);
+        var vo = converter.converterEntityToVO(personRepository.save(entity));
         return vo;
     }
 
