@@ -2,8 +2,8 @@ package br.com.wendt.restwithspringboot.services;
 
 import br.com.wendt.restwithspringboot.converter.DozerConverter;
 import br.com.wendt.restwithspringboot.converter.custom.PersonConverter;
-import br.com.wendt.restwithspringboot.data.vo.PersonVO;
-import br.com.wendt.restwithspringboot.data.vo.v2.PersonVOV2;
+import br.com.wendt.restwithspringboot.data.vo.v1.PersonVO;
+import br.com.wendt.restwithspringboot.data.vo.v1.PersonVOV2;
 import br.com.wendt.restwithspringboot.exception.ResourceNotFoundException;
 import br.com.wendt.restwithspringboot.data.model.Person;
 import br.com.wendt.restwithspringboot.repository.PersonRepository;

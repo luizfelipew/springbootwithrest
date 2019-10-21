@@ -1,7 +1,7 @@
 package br.com.wendt.restwithspringboot.converter.mocks;
 
 import br.com.wendt.restwithspringboot.data.model.Person;
-import br.com.wendt.restwithspringboot.data.vo.PersonVO;
+import br.com.wendt.restwithspringboot.data.vo.v1.PersonVO;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package br.com.wendt.restwithspringboot.converter.custom;
 
 import br.com.wendt.restwithspringboot.data.model.Person;
-import br.com.wendt.restwithspringboot.data.vo.v2.PersonVOV2;
+import br.com.wendt.restwithspringboot.data.vo.v1.PersonVOV2;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

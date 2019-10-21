@@ -2,7 +2,7 @@ package br.com.wendt.restwithspringboot.converter;
 
 import br.com.wendt.restwithspringboot.converter.mocks.MockPerson;
 import br.com.wendt.restwithspringboot.data.model.Person;
-import br.com.wendt.restwithspringboot.data.vo.PersonVO;
+import br.com.wendt.restwithspringboot.data.vo.v1.PersonVO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
