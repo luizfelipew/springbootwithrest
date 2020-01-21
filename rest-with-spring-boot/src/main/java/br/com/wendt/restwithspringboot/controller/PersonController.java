@@ -16,34 +16,35 @@ public class PersonController {
     @Autowired
     private PersonService service;
 
-    @GetMapping
+    @GetMapping(produces = {"application/json", "application/xml"})
     public List<PersonVO> findAll() {
         return service.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {"application/json", "application/xml"})
     public PersonVO findById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
-
     }
 
-    @PostMapping
-    public PersonVO create(@RequestBody PersonVO personVO){
+    @PostMapping(produces = {"application/json", "application/xml"},
+        consumes = {"application/json", "application/xml"})
+    public PersonVO create(@RequestBody PersonVO personVO) {
         return service.create(personVO);
     }
 
     @PostMapping("/v2")
-    public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2){
+    public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2) {
         return service.createV2(personVOV2);
     }
 
-    @PutMapping
-    public PersonVO update(@RequestBody PersonVO personVO){
+    @PutMapping(produces = {"application/json", "application/xml"},
+        consumes = {"application/json", "application/xml"})
+    public PersonVO update(@RequestBody PersonVO personVO) {
         return service.update(personVO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
