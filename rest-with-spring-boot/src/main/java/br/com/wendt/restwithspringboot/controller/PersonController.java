@@ -16,18 +16,18 @@ public class PersonController {
     @Autowired
     private PersonService service;
 
-    @GetMapping(produces = {"application/json", "application/xml"})
+    @GetMapping(produces = {"application/json", "application/xml", "application/x-yaml"})
     public List<PersonVO> findAll() {
         return service.findAll();
     }
 
-    @GetMapping(value = "/{id}", produces = {"application/json", "application/xml"})
+    @GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO findById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
 
-    @PostMapping(produces = {"application/json", "application/xml"},
-        consumes = {"application/json", "application/xml"})
+    @PostMapping(produces = {"application/json", "application/xml", "application/x-yaml"},
+        consumes = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO create(@RequestBody PersonVO personVO) {
         return service.create(personVO);
     }
@@ -37,8 +37,8 @@ public class PersonController {
         return service.createV2(personVOV2);
     }
 
-    @PutMapping(produces = {"application/json", "application/xml"},
-        consumes = {"application/json", "application/xml"})
+    @PutMapping(produces = {"application/json", "application/xml", "application/x-yaml"},
+        consumes = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO update(@RequestBody PersonVO personVO) {
         return service.update(personVO);
     }
