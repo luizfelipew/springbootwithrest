@@ -9,12 +9,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-//@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
+@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
 public class PersonVO extends ResourceSupport implements Serializable {
 
     private static final long serialVersionUID = -1532146641385397203L;
 
     @Mapping("id")
+    @JsonProperty("id")
     private Long key;
 
     @JsonProperty("first_name")

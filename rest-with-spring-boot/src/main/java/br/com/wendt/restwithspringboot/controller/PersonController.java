@@ -1,5 +1,6 @@
 package br.com.wendt.restwithspringboot.controller;
 
+import br.com.wendt.restwithspringboot.data.model.Person;
 import br.com.wendt.restwithspringboot.data.vo.v1.PersonVO;
 import br.com.wendt.restwithspringboot.data.vo.v1.PersonVOV2;
 import br.com.wendt.restwithspringboot.services.PersonService;
@@ -21,7 +22,13 @@ public class PersonController {
 
     @GetMapping(produces = {"application/json", "application/xml", "application/x-yaml"})
     public List<PersonVO> findAll() {
-        return service.findAll();
+        List<PersonVO> persons = service.findAll();
+        persons
+            .forEach(p -> p.add(
+                linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()
+                               )
+                    );
+        return persons;
     }
 
     @GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
@@ -33,25 +40,29 @@ public class PersonController {
 
     @PostMapping(produces = {"application/json", "application/xml", "application/x-yaml"},
         consumes = {"application/json", "application/xml", "application/x-yaml"})
-    public PersonVO create(@RequestBody PersonVO personVO) {
-        return service.create(personVO);
-    }
-
-    @PostMapping("/v2")
-    public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2) {
-        return service.createV2(personVOV2);
+    public PersonVO create(@RequestBody PersonVO person) {
+        PersonVO personVO = service.create(person);
+        personVO.add(linkTo(methodOn(PersonController.class).findById(personVO.getKey())).withSelfRel());
+        return personVO;
     }
 
     @PutMapping(produces = {"application/json", "application/xml", "application/x-yaml"},
         consumes = {"application/json", "application/xml", "application/x-yaml"})
-    public PersonVO update(@RequestBody PersonVO personVO) {
-        return service.update(personVO);
+    public PersonVO update(@RequestBody PersonVO person) {
+        PersonVO personVO = service.update(person);
+        personVO.add(linkTo(methodOn(PersonController.class).findById(personVO.getKey())).withSelfRel());
+        return personVO;
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/v2")
+    public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2) {
+        return service.createV2(personVOV2);
     }
 
 }
