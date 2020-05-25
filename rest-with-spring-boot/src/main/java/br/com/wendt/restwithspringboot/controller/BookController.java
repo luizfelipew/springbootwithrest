@@ -5,6 +5,9 @@ import br.com.wendt.restwithspringboot.data.vo.v1.PersonVO;
 import br.com.wendt.restwithspringboot.data.vo.v1.PersonVOV2;
 import br.com.wendt.restwithspringboot.services.BookService;
 import br.com.wendt.restwithspringboot.services.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +25,7 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+@Api(value = "Book endpoint", tags = {"Book endpoint"})
 @RestController
 @RequestMapping("/api/book/v1")
 public class BookController {
@@ -29,6 +33,7 @@ public class BookController {
     @Autowired
     private BookService service;
 
+    @ApiOperation(value = "Find all Books recorded")
     @GetMapping(produces = {"application/json", "application/xml", "application/x-yaml"})
     public List<BookVO> findAll() {
         List<BookVO> books = service.findAll();
@@ -40,6 +45,7 @@ public class BookController {
         return books;
     }
 
+    @ApiOperation(value = "Find a specific book by your ID")
     @GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
     public BookVO findById(@PathVariable(value = "id") Long id) {
         BookVO bookVO = service.findById(id);
@@ -47,6 +53,7 @@ public class BookController {
         return bookVO;
     }
 
+    @ApiOperation(value = "Create a book")
     @PostMapping(produces = {"application/json", "application/xml", "application/x-yaml"},
         consumes = {"application/json", "application/xml", "application/x-yaml"})
     public BookVO create(@RequestBody BookVO book) {
@@ -55,6 +62,7 @@ public class BookController {
         return bookVO;
     }
 
+    @ApiOperation(value = "Update a book")
     @PutMapping(produces = {"application/json", "application/xml", "application/x-yaml"},
         consumes = {"application/json", "application/xml", "application/x-yaml"})
     public BookVO update(@RequestBody BookVO book) {
@@ -63,6 +71,8 @@ public class BookController {
         return bookVO;
     }
 
+
+    @ApiOperation(value = "Delete a specific book")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
