@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+//@CrossOrigin
 @Api(value = "Person endpoint", tags = {"Person endpoint"})
 @RestController
 @RequestMapping("/api/person/v1")
@@ -41,6 +43,7 @@ public class PersonController {
         return persons;
     }
 
+//    @CrossOrigin(origins = {"http://localhost:8080", "http://xablausites.com"})
     @ApiOperation(value = "Find a specific person by your ID")
     @GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO findById(@PathVariable(value = "id") Long id) {
