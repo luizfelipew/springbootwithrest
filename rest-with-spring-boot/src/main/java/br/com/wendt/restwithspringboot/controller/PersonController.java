@@ -37,13 +37,12 @@ public class PersonController {
         List<PersonVO> persons = service.findAll();
         persons
             .forEach(p -> p.add(
-                linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()
-                               )
+                linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel())
                     );
         return persons;
     }
 
-//    @CrossOrigin(origins = {"http://localhost:8080", "http://xablausites.com"})
+    //    @CrossOrigin(origins = {"http://localhost:8080", "http://xablausites.com"})
     @ApiOperation(value = "Find a specific person by your ID")
     @GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO findById(@PathVariable(value = "id") Long id) {
