@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
+@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender", "enabled"})
 public class PersonVO extends ResourceSupport implements Serializable {
 
     private static final long serialVersionUID = -1532146641385397203L;
@@ -28,6 +28,9 @@ public class PersonVO extends ResourceSupport implements Serializable {
     // @JsonIgnore
     @JsonProperty("gender")
     private String gender;
+
+    @JsonProperty("enabled")
+    private Boolean enabled;
 
     public PersonVO() {
     }
@@ -72,6 +75,14 @@ public class PersonVO extends ResourceSupport implements Serializable {
         this.gender = gender;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(final Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -82,12 +93,13 @@ public class PersonVO extends ResourceSupport implements Serializable {
             Objects.equals(firstName, personVO.firstName) &&
             Objects.equals(lastName, personVO.lastName) &&
             Objects.equals(address, personVO.address) &&
-            Objects.equals(gender, personVO.gender);
+            Objects.equals(gender, personVO.gender) &&
+            Objects.equals(enabled, personVO.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), key, firstName, lastName, address, gender);
+        return Objects.hash(super.hashCode(), key, firstName, lastName, address, gender, enabled);
     }
 
 }

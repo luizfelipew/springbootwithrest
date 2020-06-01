@@ -1,9 +1,9 @@
 package br.com.wendt.restwithspringboot.controller;
 
-import br.com.wendt.restwithspringboot.data.vo.v1.BookVO;
 import br.com.wendt.restwithspringboot.repository.UserRepository;
 import br.com.wendt.restwithspringboot.security.AccountCredentialsVO;
 import br.com.wendt.restwithspringboot.security.jwt.JwtTokenProvider;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.ok;
 
+@Api("AuthenticationEndpoint")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

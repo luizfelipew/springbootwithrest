@@ -1,6 +1,11 @@
 package br.com.wendt.restwithspringboot.data.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -25,6 +30,9 @@ public class Person implements Serializable {
 
     @Column(name = "gender", nullable = false, length = 6)
     private String gender;
+
+    @Column(nullable = false)
+    private Boolean enabled;
 
     public Person() {
     }
@@ -69,20 +77,30 @@ public class Person implements Serializable {
         this.gender = gender;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(final Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
-        return id.equals(person.id) &&
-                firstName.equals(person.firstName) &&
-                lastName.equals(person.lastName) &&
-                address.equals(person.address) &&
-                gender.equals(person.gender);
+        if (o == null || getClass() != o.getClass()) return false;
+        final Person person = (Person) o;
+        return Objects.equals(id, person.id) &&
+            Objects.equals(firstName, person.firstName) &&
+            Objects.equals(lastName, person.lastName) &&
+            Objects.equals(address, person.address) &&
+            Objects.equals(gender, person.gender) &&
+            Objects.equals(enabled, person.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, gender);
+        return Objects.hash(id, firstName, lastName, address, gender, enabled);
     }
+
 }
