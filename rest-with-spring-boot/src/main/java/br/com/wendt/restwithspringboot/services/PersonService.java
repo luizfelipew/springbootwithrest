@@ -8,6 +8,7 @@ import br.com.wendt.restwithspringboot.data.vo.v1.PersonVOV2;
 import br.com.wendt.restwithspringboot.exception.ResourceNotFoundException;
 import br.com.wendt.restwithspringboot.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +36,13 @@ public class PersonService {
         return vo;
     }
 
-    public List<PersonVO> findAll(final Pageable pageable) {
-        var entitites = personRepository.findAll(pageable).getContent();
-        return DozerConverter.parseListObjects(entitites, PersonVO.class);
+    public Page<PersonVO> findAll(final Pageable pageable) {
+        var page = personRepository.findAll(pageable);
+        return page.map(this::converterPersonVO);
+    }
+
+    public PersonVO converterPersonVO(final Person entity){
+        return DozerConverter.parseObject(entity, PersonVO.class);
     }
 
     public PersonVO findById(Long id) {
