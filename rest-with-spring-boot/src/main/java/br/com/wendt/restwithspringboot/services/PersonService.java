@@ -36,12 +36,17 @@ public class PersonService {
         return vo;
     }
 
+    public Page<PersonVO> findPersonByName(final String firstName, final Pageable pageable) {
+        var page = personRepository.findPersonByName(firstName, pageable);
+        return page.map(this::converterPersonVO);
+    }
+
     public Page<PersonVO> findAll(final Pageable pageable) {
         var page = personRepository.findAll(pageable);
         return page.map(this::converterPersonVO);
     }
 
-    public PersonVO converterPersonVO(final Person entity){
+    public PersonVO converterPersonVO(final Person entity) {
         return DozerConverter.parseObject(entity, PersonVO.class);
     }
 
