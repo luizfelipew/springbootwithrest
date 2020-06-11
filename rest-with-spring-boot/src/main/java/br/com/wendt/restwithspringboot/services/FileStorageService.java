@@ -28,7 +28,7 @@ public class FileStorageService {
         }
     }
 
-    public String storedFiles(final MultipartFile file) {
+    public String storeFile(final MultipartFile file) {
         final String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
